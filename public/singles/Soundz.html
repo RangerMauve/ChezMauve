@@ -1,0 +1,230 @@
+<html>
+	<head>
+		<!--------------------------------------
+			Made By RangerMauve, 2013
+			Eamil me at RangerMauve@hotmail.com
+		---------------------------------------->
+		<title>Soundz</title>
+		<style>
+			html, body {margin:0;padding:0;}
+			body {
+				font-family:"Courier New";
+				color:#000;
+				background:#000;
+				font-size:large;
+				height:100%;
+				margin:0;
+			}
+			header {
+				text-align:center;
+				padding:15px;
+				font-weight:bold;
+			}
+			#content {
+				height:100%;
+				border-radius:50px;
+				background:#FFF;
+			}
+			#buttons, #controls {
+				margin: 4 auto;
+				padding:4px;
+				border:4px double #000;
+			}
+			#buttons {
+				text-align:center;
+				max-width:165;px;
+			}
+			#controls {
+				width:220px;
+			}
+			#noteinfo{
+				font-size:small;
+				display:inline-block;
+			}
+			#volcont {
+				width:90%;
+				margin:0 auto;
+				text-align:center;
+			}
+			#volume {
+				width:75%;
+			}
+			.butt {
+				display:inline-block;
+				text-align:center;
+				border:2px solid #000;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			.butt:hover {
+				color:#FFF;
+				background:#000;
+			}
+			.sbutt{
+				font-size:small;
+				width:50;
+			}
+			footer {
+				font-size:x-small;
+				position:fixed;
+				bottom:20px;
+				left:20px;
+				width:90%;
+				height:10px;
+				color:#666;
+			}
+			#split {
+				width:100px;
+				margin:0 auto;
+				text-align:center;
+				font-size:small;
+			}
+			#split:hover {
+				color:#FFF;
+				background:#000;
+			}
+		</style>
+		<script>
+			function getValue(id){
+				try{return document.getElementById(id).value;} catch (err){return "";}
+			}
+			function setValue(id, stuff){
+				try{document.getElementById(id).value = stuff;} catch (err){}
+			}
+			function setContent(id, content){
+				document.getElementById(id).innerHTML = "" + content;
+				return content;
+			}
+			function toggleVisible(id){
+				var s= document.getElementById(id).style;
+				s.display = (s.display == 'none') ? 'block' : 'none';
+				console.log("Set "+id+"'s display to "+s.display);
+				return s.display;
+			}
+			var context, oscillator, gain, pan;
+				
+			var soundMap = [
+				["C",523.251],
+				["B",493.883],
+				["A#/Bb",466.164],
+				["A",440.000],
+				["G#/Ab",415.305],
+				["G",391.995],
+				["F#/Gb",369.994],
+				["F",349.228],
+				["E",329.628],
+				["D#/Eb",311.127],
+				["D",293.665],
+				["C#/Db",277.183],
+				["C",261.626],
+				["B",246.942],
+				["A#/Bb",233.082],
+				["A",220.000],
+				["G#/Ab",207.652],
+				["G",195.998],
+				["F#/Gb",184.997],
+				["F",174.614],
+				["E",164.814],
+				["D#/Eb",155.563],
+				["D",146.832],
+				["C#/Db",138.591],
+				["C",130.813]
+			]
+			function sF(f){
+				console.log("Setting frequency to "+f);
+				oscillator.frequency.value = f;
+			}
+			function dF(f){
+				setContent("note",f);
+			}
+			// This shouldn't be used
+			// The other waves sound painful
+			function sT(t){
+				oscillator.type = t;
+			}
+			onload = function(){
+				if(!webkitAudioContext)return setContent("content","<center><h3>Sound API not supported on your browser!</h3></center>");
+				context = new webkitAudioContext(),
+				oscillator = context.createOscillator(),
+				gain = context.createGainNode(),
+				Lp = context.createPanner(),
+				Rp = context.createPanner(),
+				Lg = context.createGainNode(),
+				Rg = context.createGainNode(),
+				started = false;
+				oscillator.connect(Lp);
+				oscillator.connect(Rp);
+				
+				Rp.setPosition(1,0,0);
+				Rp.connect(Rg);
+				Rg.connect(gain);
+				Lp.setPosition(-1,0,0);
+				Lp.connect(Lg);
+				Lg.connect(gain);
+				document.getElementById('volume').addEventListener('change', function() {
+					gain.gain.value = this.value;
+				});
+				document.getElementById('pan').addEventListener('change', function() {
+					Lg.gain.value = 1-this.value;
+					Rg.gain.value = this.value;
+				});
+				sF(523.251);
+				var res = "";
+				for(var i = soundMap.length; i; --i){
+					var s = soundMap[i-1];
+					res+= 
+						'<div class="sbutt butt" id="'+
+						i+'-'+s[0]+'" onclick="sF('+
+						s[1]+");dF('"+s[0]+'\')">'+s[0]+'</div>';
+				}
+				//console.log(res);
+				setContent("buttons",res);
+			}
+			function play(){
+				gain.connect(context.destination);
+				if(!started){
+					oscillator.start(0);
+					gain.gain.value="0.1";
+					started=true;
+				}
+			}
+			function stop(){
+				gain.disconnect();
+			}
+			function split(){
+				stop();
+				window.location.href="./Split.html?src=./Soundz.html";
+			}
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<header>
+				Soundz
+			</header>
+			<div id="controls">
+				<div class="butt" onclick="play()">Play</div>
+				<div class="butt" onclick="stop()">Stop</div>
+				<div id="noteinfo">
+					Note:<span id="note"></span>
+				</div>
+				<div id="volcont">
+					Vol:<input id="volume" type="range" min="0" max="1" step="0.005" value="0.1"/>
+				</div>
+				<div id="pancont">
+					Pan:<input id="pan" type="range" min="0" max="1" step="0.01" value="0.5"/>
+				</div>
+			</div>
+			<div id="buttons">
+			</div>
+			<div id="split" onclick="split()">Split</div>
+		</div>
+		<footer>
+			Made by RangerMauve<a href="mailto:RangerMauve@hotmail.com">&#x2709;</a>
+		</footer>
+	</body>
+</html>

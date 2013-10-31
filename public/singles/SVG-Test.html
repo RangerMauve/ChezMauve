@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SVG Test</title>
+	<style>
+		html,body{
+			padding:0px;
+			margin:0px;
+		}
+		body {
+			height:100%;
+		}
+		#inCont, #outCont{
+			border:2px solid black;
+			position:fixed;
+			top:2%;
+			bottom:2%;
+		}
+		#outCont {
+			left:51%;
+			right:2%;
+		}
+		#inCont {
+			left:2%;
+			right:51%;
+		}
+		#input {
+			width:100%;
+			height:100%;
+			margin:0;
+			padding:0;
+			border:none;
+			resize:none;
+			-moz-tab-size:4;
+			-o-tab-size:4;
+			-webkit-tab-size:4;
+			tab-size:4; 
+		}
+		#inPad {
+			position:absolute;
+			padding:5;
+			top:5px;
+			left:5px;
+			right:5px;
+			bottom:25px;
+		}
+		#upCont {
+			position:absolute;
+			bottom:0px;
+			left:0px;
+			right:0px;
+			text-align:center;
+		}
+		#output {
+			width:100%;
+			height:100%;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			// Load previously used config if exists
+			if(window.localStorage && localStorage["svg-test"]){
+				var out = document.getElementById("outCont");
+				var inp = document.getElementById("input");
+				out.innerHTML = localStorage["svg-test"];
+				inp.value = localStorage["svg-test"];
+			}
+			var inp = document.getElementById("input");	
+			inp.onkeydown = function(e){
+				//console.log(e);
+				if(e.keyCode === 9){
+					var start = inp.selectionStart;
+					var end = inp.selectionEnd;
+					var val = inp.value;
+					inp.value = val.substring(0, start) + "\t" + val.substring(end);
+					inp.selectionStart = inp.selectionEnd = start + 1;
+					return false;
+				}
+			}
+		}
+		function update(){
+			var out = document.getElementById("outCont");
+			var inp = document.getElementById("input");
+			//console.log(out);
+			//console.log("Setting to "+inp.value);
+			out.innerHTML = inp.value;
+			if(window.localStorage){
+				localStorage["svg-test"] = inp.value;
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="inCont">
+		<div id="inPad">
+			<textarea id="input" spellcheck="false">
+<svg 
+	version= "1.1"
+	baseProfile= "full"
+	xmlns= "http://www.w3.org/2000/svg"
+	height= "100%"
+	width= "100%"
+>
+	<rect width="90%" height="90%" x="5%" y="5%" fill="#F0F" />
+</svg>
+</textarea>
+			</div>
+		<div id="upCont">
+			<button id="update" onclick="update()">Update</button>
+		</div>
+	</div>
+	<div id="outCont">
+		<svg id="output" version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
+			<rect width="90%" height="90%" x="5%" y="5%" fill="#F0F" />
+		</svg>
+	</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<title>Chose For Me 2</title>
+		<style>
+			html{
+				font-family:"Courier New";
+			}
+			#options{
+				width:200px;
+				height:300px;
+			}
+			#choose{
+				width:150;
+			}
+		</style>
+		<script type="text/javascript">
+			// This gets the options and selects a random 
+			function getOptions(){
+				return document.getElementById("options");
+			}
+			function randomize(){
+				if(!(/\S/.test(getOptions().value))){
+					return;
+				}
+				options = getOptions().value.split("\n");
+				console.log("Randomizing list:");
+				console.log(options);
+				var first, second, tmp;
+				for(var i = 0; i < options.length; i++){
+					first = Math.floor(Math.random()*options.length);
+					second = Math.floor(Math.random()*options.length);
+					tmp = options[first];
+					options[first] = options[second];
+					options[second] = tmp;
+				}
+				console.log("Randomized to:");
+				console.log(options);
+				var newOpts = ""
+				for(var i = 0; i < options.length; i++){
+					newOpts += options[i];
+					if(i != options.length - 1)
+						newOpts += "\n";
+				}
+				document.getElementById("options").value = newOpts;
+			}
+		</script>
+	</head>
+	<body>
+		<center>
+			<strong>
+				Enter your options
+				<br /><textarea id="options"></textarea>
+				<br /><button id="choose" onclick="randomize()">Randomize!</button>
+			</strong>
+		</center>
+	</body>
+</html>

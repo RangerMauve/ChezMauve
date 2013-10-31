@@ -1,0 +1,52 @@
+<html>
+<head>
+	<style>
+		html, body {
+			margin:0px;
+		}
+		#cont {
+			max-height:100%;
+		}
+		.flip {
+			-moz-transform: scaleX(-1);
+			-o-transform: scaleX(-1);
+			-webkit-transform: scaleX(-1);
+			transform: scaleX(-1);
+			filter: FlipH;
+			-ms-filter: "FlipH";
+		}
+	</style>
+</head>
+<body>
+	<audio autoplay loop>
+		<source src="/games/pimpest/donlike.mp3" type="audio/mp3">
+		<source src="/games/pimpest/donlike.ogg" type="audio/ogg">
+	</audio>
+	<center>
+		<img id="cont" src="/games/pimpest/Thingie.png"></img>
+	</center>
+	<script>
+		var el = document.getElementById("cont");
+		var df = false;
+		var cbg = 0;
+		var bgc = ["#FFE","#FEC","#EFC"];
+		function bgch(){
+			document.body.style.background=bgc[cbg];
+			cbg++;
+			if(cbg >= bgc.length)cbg=0;
+		}
+		
+		function flip(){
+			if(df){
+				el.className ="flip";
+			} else {
+				el.className = "";
+			}
+			df = !df;
+			bgch();
+		}
+		//el.onclick = flip;
+		setInterval(flip,400)
+	</script>
+</body>
+</html>

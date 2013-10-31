@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		html, body {
+			margin:0;
+			padding:0;
+			height:100%;
+		}
+		iframe{
+			margin:0;
+			display:inline-block;
+		}
+	</style>
+	<script type="text/javascript">
+		var urlQuery = {};
+		(function () {
+			var hr = window.location.href,
+				qs = hr.slice(hr.lastIndexOf("?")+1).split("&");
+				for(var el in qs){
+					var sp = qs[el].split("=");
+					urlQuery[sp[0]] = sp[1] || null;
+				}
+		})();
+		onload = function(){
+			console.log("Setting up the frames");
+			var orient = 
+				urlQuery["orient"] && 
+				urlQuery["orient"].charAt(0).toUpperCase()===
+				"H" ? true : false;
+			var src = urlQuery.src || "./Split.html";
+			var one = document.getElementById("one");
+			var two = document.getElementById("two");
+			if(orient){
+				one.style.width="98%";
+				one.style.height="49%";
+				two.style.width="98%";
+				two.style.height="49%";
+			} else {
+				one.style.width="49%";
+				one.style.height="98%";
+				two.style.width="49%";
+				two.style.height="98%";
+			}
+			one.src = src;
+			two.src = src;
+		}
+	</script>
+</head>
+<body>
+	<iframe id="one"></iframe>
+	<iframe id="two"></iframe>
+</body>
+</html>

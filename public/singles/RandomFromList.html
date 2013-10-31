@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title>Chose For Me</title>
+		<style>
+			html{
+				font-family:"Courier New";
+			}
+			#options{
+				width:200px;
+				height:300px;
+			}
+			#choose{
+				width:150;
+			}
+		</style>
+		<script type="text/javascript">
+			// This gets the options and selects a random one
+			function decide(){
+				options = document.getElementById("options").value.split("\n");
+				console.log("Selecting from"+String(options));
+				selected = options[Math.floor(Math.random()*options.length)];
+				//alert("Do: "+selected);
+				document.getElementById("selection").innerHTML="Do: "+selected;
+				console.log("Chose "+selected);
+			}
+		</script>
+	</head>
+	<body>
+		<center>
+			<strong>
+				Enter your options
+				<br /><textarea id="options"></textarea>
+				<br /><button id="choose" onclick="decide()">Choose</button>
+				<div id="selection"></div>
+			</strong>
+		</center>
+	</body>
+</html>

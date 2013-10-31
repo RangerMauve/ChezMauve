@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		body{
+			margin:0;
+			padding:0;
+			overfow:hidden;
+		}
+		html {
+			margin:0;
+			padding:0;
+			overflow:hidden;
+		}
+		#canvas {
+			display:block;
+			margin:0;
+		}
+		#titleCont {
+			position:absolute;
+			width:100%;
+		}
+		#title {
+			width:100px;
+			margin:0 auto;
+		}
+		#info {
+			position:absolute;
+			left:32;
+			right:32;
+		}
+		#FPS {
+			left:20px;
+			top:20px;
+			color:FFF;
+		}
+		#pointer{
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			text-align:center;
+			margin-top: -10px;
+			margin-left: -10px;
+		}
+	</style>
+	<script src="/Libs/processing-api.js"></script>
+	<script src="/Libs/EasyLock.js"></script>
+</head>
+<body>
+	<div id="titleCont">
+		<div id="title">Dodge</div>
+	</div>
+	<div id="info">
+		FPS:<span id="FPS"></span>
+	</div>
+	<div id="pointer">+</div>
+	<canvas id="canvas"></canvas>
+	<script src="/games/dodge/main.js"></script>
+	<script src="/games/dodge/Entity.js"></script>
+	<script src="/games/dodge/Player.js"></script>
+	<script src="/games/dodge/Arena.js"></script>
+</body>
+</html>

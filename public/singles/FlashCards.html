@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style>
+			html{font-family:"Courier New", Courier, monospace;}
+			#side1{float:left;}
+			#side2{float:right;}
+			#sides{height:170px;}
+			#cardMakerControls{width:580;}
+			#side1, #side2{margin-left:auto;margin-right:auto;width:270px;height:100%;}
+			#side1Area, #side2Area{width:98%;height:90%;}
+			#cardMakerField, #trainingField, #statDumpsField{width:600px;}
+			#trainingField, #statDump, #deckShare{text-align:left;}
+			#cardControls, #deckOpts {text-align:right;}
+			#deckOpts, #cardControls{width:49%;display: inline-block;}
+			#deckName{width:75%;}
+			#statDump{white-space:pre-wrap;}
+			textarea {resize:none;}
+			legend{text-align:center;	}
+		</style>
+		<script src="/scripts/jquery.js"></script>
+		<script type="text/javascript">
+			var Deck = [], CardNumber = null, cansave = true, Decks ={};
+			$(function(){
+				if(!localStorage){
+					cansave = false;
+					alert("Your browser does not support Web Storage. You will not be able to save");
+					$("#saveDeck").hide();$("#loadDeck").hide();$("#deckName").hide();
+				} else {
+					try{
+						var td = JSON.parse(localStorage.deck);
+						if(td instanceof Array)	Deck = td;
+						else throw "DeckNotArray";
+					}
+					catch(err){
+						console.log("Couldn't load deck");
+						
+						localStorage.deck = "[]";
+					};
+					try{
+						var tds = JSON.parse(localStorage.decks);
+						if(tds instanceof Object)	Decks = tds;
+						else throw "DecksNotmap";
+					}catch(err){
+						console.log("Couldn't load decks");
+						localStorage.decks = "{}";
+					};
+				};
+				$("#statDumpsField").hide();
+				$("#cardMakerToggle").click(function(){$("#cardMaker").toggle()});
+				$("#dumpDeck").click(function(){
+					$("#statDumpsField").show();
+					var seen = [],
+						res =
+							"Current:"+
+							JSON.stringify(Deck, function(key, val) {
+							if (typeof val == "object") {
+								if (seen.indexOf(val) >= 0)
+								return undefined;
+								seen.push(val);
+							}
+							return val;
+						},"  ") + (seen = [],"") +"\nAll:" +
+						JSON.stringify(Decks, function(key, val) {
+							if (typeof val == "object") {
+								if (seen.indexOf(val) >= 0)
+								return undefined;
+								seen.push(val);
+							}
+							return val;},"  ");
+					$("#statDump").html(res);
+					console.log(localStorage.deck);
+				});
+				$("#hideStatDump").click(function(){$("#statDumpsField").hide();	});
+				$("#addCard").click(function(){
+					var t1 = $("#side1Area").val(), t2 = $("#side2Area").val();
+					if(t1.length >= 2 && t2.length >= 1){
+						Deck.push({Question:t1,Answer:t2});
+						console.log(Deck);
+					} else {
+						console.log(t1);console.log(t2);
+					}
+					if($("#statDumpsField").is(":visible"))
+						$("#dumpDeck").trigger("click");
+				});
+				$("#nextCard").click(function(){
+					if(Deck.length == 0)return;
+					CardNumber = Math.floor(Math.random()*Deck.length);
+					console.log(CardNumber);
+					$("#question").html(Deck[CardNumber].Question);
+					console.log(Deck[CardNumber].Question);
+					$("#answer").html("");
+				});
+				$("#deleteCard").click(function(){
+					if(CardNumber == null)return;
+					Deck.splice(CardNumber,1);
+					CardNumber = null;
+					$("#question").html("");
+					$("#answer").html("");
+					if($("#statDumpsField").is(":visible"))
+						$("#dumpDeck").trigger("click");
+				});
+				$("#showButton").click(function(){
+					if(CardNumber == null)return;
+					$("#answer").html(Deck[CardNumber].Answer);
+				});
+				$("#saveDeck").click(function(){
+					localStorage.deck = JSON.stringify(Deck);
+					var dn = $("#deckName").val();
+					if(dn){
+						Decks[dn] = Deck;
+						if(Deck.length == 0)delete Decks[dn];
+						localStorage.decks = JSON.stringify(Decks);
+					}
+					console.log("Saving to deck "+dn);
+					console.log(localStorage.deck);
+					if($("#statDumpsField").is(":visible"))
+						$("#dumpDeck").trigger("click");
+				});
+				$("#loadDeck").click(function(){
+				try{
+					var dn = $("#deckName").val(); 
+					dn = JSON.parse(localStorage.decks)[dn];
+					if(dn instanceof Array){Deck = dn;}
+					else {
+						console.log("Deck not made yet");
+						Deck = [];
+					}
+				} catch(e){
+					console.log("Couldn't load deck");
+				}
+				if($("#statDumpsField").is(":visible"))
+					$("#dumpDeck").trigger("click");
+				});
+				$("#loadShareData").click(function(){
+					var d = JSON.parse($("#shareData").val());
+					if(d instanceof Array){
+						Deck = d;
+					} else if(d instanceof Object){
+						$.each(d,function(k,v){
+							if(!(v instanceof Array))return;
+							Decks[k] = v;
+							localStorage.decks = JSON.stringify(Decks);
+						});
+					} else {
+						return console.log("Invalid deck shared");
+					}
+					if($("#statDumpsField").is(":visible"))
+						$("#dumpDeck").trigger("click");
+				});
+				$("#clearDeck").click(function(){
+					Deck = [];
+					if($("#statDumpsField").is(":visible"))
+						$("#dumpDeck").trigger("click");
+				});
+			});
+		</script>
+		<title>Flash Cards</title>
+	</head>
+	<body>
+		<center>
+			<H1 id="pageTitle">Flash Cards</H1>
+			<fieldset id="trainingField">
+				<legend>
+					Training:
+					<button id="nextCard">Next Card</button>
+					<button id="deleteCard">Remove Current</button>
+				</legend>
+				<div>
+					Question:
+					<span id="question"></span>
+				</div>
+				<div>
+					Answer:
+					<button id="showButton">Show</button>
+					<span id="answer"></span>
+				</div>
+			</fieldset>
+			<fieldset id="cardMakerField">
+				<legend>
+					CardMaker:
+					<button id="cardMakerToggle">	Toggle</button>
+				</legend>
+				<div id="cardMaker">
+					<div id="cardMakerControls">
+						<span id="deckOpts">
+							Deck:
+							<input type="text" id="deckName"></input>
+							<button id="dumpDeck">Show</button>
+							<button id="saveDeck">Save</button>
+							<button id="loadDeck">Load</button>
+							<button id="clearDeck">Clear</button>
+						</span>
+						<span id="cardControls">
+							<button id="addCard">Add Card</button>
+						</span>
+					</div>
+					<div id="sides">
+						<fieldset id="side1">
+							<legend>Question</legend>
+							<textarea id="side1Area"></textarea>
+						</fieldset>
+						<fieldset id="side2">
+							<legend>Answer</legend>
+							<textarea id="side2Area"></textarea>
+						</fieldset>
+					</div>
+					<div id="deckShare">
+						Load From Text:
+						<input type="text" id="shareData"></input>
+						<button id="loadShareData">Go</button>
+					</div>
+				</div>
+			</fieldset>
+			<fieldset id="statDumpsField">
+				<legend>
+					Deck Dumps
+					<button id="hideStatDump">Hide</button>
+				</legend>
+				<div id="statDump"></div>
+			</fieldset>
+		</center>
+	</body>
+</html>
