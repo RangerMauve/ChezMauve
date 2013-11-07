@@ -1,9 +1,19 @@
-body, html {
+body,
+html {
 	font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-	margin:0;
-	padding:0;
+	margin: 0;
+	padding: 0;
 }
-
 #content {
 	margin: 0 1em;
+}
+.ui.list a {
+	cursor: pointer;
+}
+a {
+	color: #009FDA;
+	text-decoration: none;
+}
+a:hover {
+	color: #00BAFF;
 }
