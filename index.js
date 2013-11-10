@@ -2,7 +2,8 @@ var
 	express = require("express"),
 	exphbs  = require('express3-handlebars'),
 	app = express(),
-	logger = require("http-logger").logger;
+	logger = require("http-logger").logger,
+	path = require("path");
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');

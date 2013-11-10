@@ -17,3 +17,9 @@ a {
 a:hover {
 	color: #00BAFF;
 }
+#viewFrame {
+	width:100%;
+	border:none;
+	maring:0;
+	padding:0;
+}
