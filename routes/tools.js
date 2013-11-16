@@ -1,10 +1,11 @@
 var caching = require("../caching"),
-	notmodified = require("notmodified");
+	notmodified = require("notmodified"),
+	require("path");
 
 module.exports = function (app) {
 	app.get("/tools", function (req, res) {
 		// Set caching for this route based on the template since the data is static
-		caching.cacheInfo("./templates/viewlist.jade", function (err, info) {
+		caching.cacheInfo(path.normalize(__dirname+"/../templates/viewlist.jade"), function (err, info) {
 			if(err)return res.send(500,err.stack);
 			if (notmodified(req, res, info)) return res.end();
 
