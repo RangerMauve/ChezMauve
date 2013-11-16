@@ -1,4 +1,4 @@
 extends layout
 
 block content
-	iframe#viewFrame(src=view.url)
+	iframe#viewFrame(src=view.url,onload="fitSize(this)")

@@ -11,12 +11,12 @@ $chatToggle.click(function () {
 	$chat.sidebar("toggle");
 });
 
-$("#viewFrame").load(function(){
+function fitSize(e){
 	console.log("ViewFrame has loaded");
 	function updateSize(){
 		var b = $(this.contentWindow.document);
 		this.style.height = b.height()+"px";
 		this.style.display = "block";
 	}
-	setTimeout(updateSize.bind(this),100);
-})
+	setTimeout(updateSize.bind(e),100);
+}
