@@ -14,7 +14,7 @@ html
 				a(href=link.url,class=(link.name===tab?'active item':"item"))
 					i(class=link.icon + " icon")
 					=link.name
-			menu.right.icon.menu
+			span.right.icon.menu
 				each link in menu.contact
 					a.item(href=link.url)
 						i(class=link.icon+" icon")
