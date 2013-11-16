@@ -1,0 +1,12 @@
+//- list format {description:"",items:[{title:"",description:"",url:"",icon:""}]}
+extends layout
+
+block content
+	p=list.description
+	.ui.divided.list
+		each item in list.items
+			.item
+				i(class=list.icon+" icon")
+				.content
+					a.header(href=item.url)= item.title
+					.description= item.description

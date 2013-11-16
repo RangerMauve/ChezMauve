@@ -1,0 +1,22 @@
+doctype 5
+html
+	head
+		title Chez Mauve - #{title}
+		link(href="css/semantic.min.css", rel="stylesheet",type="text/css")
+		link(href="css/style.css", rel="stylesheet", type="text/css")
+		meta(charset="utf-8")
+		meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+		block head
+	body
+		h1.ui.center.aligned.purple.header Chez Mauve
+		menu.ui.inverted.menu
+			each link in menu.links
+				a(href=link.url,class=(link.name===tab?'active item':"item"))
+					i(class=link.icon + " icon")
+					=link.name
+			menu.right.icon.menu
+				each link in menu.contact
+					a.item(href=link.url)
+						i(class=link.icon+" icon")
+		.ui.segment#content
+			block content
