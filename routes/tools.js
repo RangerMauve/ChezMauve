@@ -1,6 +1,6 @@
 var caching = require("../caching"),
 	notmodified = require("notmodified"),
-	require("path");
+	path = require("path");
 
 module.exports = function (app) {
 	app.get("/tools", function (req, res) {
