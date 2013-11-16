@@ -6,7 +6,7 @@ block content
 	.ui.divided.list
 		each item in list.items
 			.item
-				i(class=list.icon+" icon")
+				i(class="circular "+item.icon+" icon")
 				.content
 					a.header(href=item.url)= item.title
 					.description= item.description

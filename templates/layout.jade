@@ -2,8 +2,8 @@ doctype 5
 html
 	head
 		title Chez Mauve - #{title}
-		link(href="css/semantic.min.css", rel="stylesheet",type="text/css")
-		link(href="css/style.css", rel="stylesheet", type="text/css")
+		link(href="/css/semantic.min.css", rel="stylesheet",type="text/css")
+		link(href="/css/style.css", rel="stylesheet", type="text/css")
 		meta(charset="utf-8")
 		meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
 		block head
@@ -20,3 +20,6 @@ html
 						i(class=link.icon+" icon")
 		.ui.segment#content
 			block content
+		script(src="/scripts/jquery.js")
+		script(src="/scripts/semantic.min.js")
+		script(src="/scripts/scripts.js")

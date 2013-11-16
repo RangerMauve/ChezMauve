@@ -10,11 +10,11 @@ html {
 .ui.list a {
 	cursor: pointer;
 }
-a {
+.ui.list a {
 	color: #009FDA;
 	text-decoration: none;
 }
-a:hover {
+.ui.list a:hover {
 	color: #00BAFF;
 }
 #viewFrame {
@@ -22,4 +22,5 @@ a:hover {
 	border:none;
 	maring:0;
 	padding:0;
+	display:none;
 }
