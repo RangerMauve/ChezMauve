@@ -2,7 +2,8 @@ var
 	express = require("express"),
 	app = express(),
 	logger = require("http-logger").logger,
-	path = require("path");
+	path = require("path"),
+	busy = require("busy")();
 
 // Set up templates
 app.set("views",__dirname+"/templates");
@@ -21,6 +22,11 @@ app.locals.menu = {
 		{url:"http://www.linkedin.com/profile/view?id=280090458",icon:"linkedin"}
 	]
 }
+
+// Prevent server for crashing too hard under high load
+app.use(function(req,res,next){
+	busy.blocked ? res.send(503,"Server load too high") : next();
+});
 
 // Parsing out the body and session data
 app.use(express.json());
