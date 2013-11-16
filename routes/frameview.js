@@ -8,7 +8,7 @@ module.exports = function (app) {
 			if (err) return res.send(500, err.stack);
 			if (notmodified(req, res, info)) return res.end();
 			var path = req.params[0];
-			var name = fpath.match(/\/([^\/]+).html/)[1];
+			var name = path.match(/\/([^\/]+).html/)[1];
 			res.render("frameview", {
 				title: name,
 				view: {
