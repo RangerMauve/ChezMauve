@@ -40,4 +40,11 @@ require("./routes")(app);
 app.use(express.static(__dirname + "/public"));
 app.use(express.directory('public'))
 
+// For pesky bots scanning stuff they shouldn't be
+app.use(function(req, res,next) {
+	res.writeHead(418);
+	res.end("<html>\n<center><h1>404</h1></center>\n<!-- What are you even looking here for?-->\n</html>");
+});
+
+
 app.listen(process.env.VCAP_APP_PORT || 80);
