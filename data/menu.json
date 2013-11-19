@@ -1,0 +1,42 @@
+{
+	"links": [
+		{
+			"name": "Home",
+			"url": "/",
+			"icon": "home"
+		},
+		{
+			"name": "Games",
+			"url": "/games",
+			"icon": "gamepad"
+		},
+		{
+			"name": "Tools",
+			"url": "/tools",
+			"icon": "wrench"
+		},
+		{
+			"name": "Userscripts",
+			"url": "/userscripts",
+			"icon": "puzzle piece"
+		}
+	],
+	"contact": [
+		{
+			"url": "https://github.com/RangerMauve",
+			"icon": "green github"
+		},
+		{
+			"url": "https://twitter.com/LoneMauve",
+			"icon": "blue twitter"
+		},
+		{
+			"url": "http://www.linkedin.com/profile/view?id=280090458",
+			"icon": "linkedin"
+		},
+		{
+			"url":"mailto:RangerMauve@hotmail.com",
+			"icon":"teal mail outline"
+		}
+	]
+}
