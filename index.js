@@ -9,19 +9,7 @@ var
 app.set("views",__dirname+"/templates");
 app.set("view engine","jade");
 app.locals.pretty = true;
-app.locals.menu = {
-	links:[
-		{name:"Home",url:"/",icon:"home"},
-		{name:"Games",url:"/games",icon:"gamepad"},
-		{name:"Tools",url:"/tools",icon:"wrench"},
-		{name:"Userscripts",url:"/userscripts",icon:"puzzle piece"},
-	],
-	contact:[
-		{url:"https://github.com/RangerMauve",icon:"green github"},
-		{url:"https://twitter.com/LoneMauve",icon:"blue twitter"},
-		{url:"http://www.linkedin.com/profile/view?id=280090458",icon:"linkedin"}
-	]
-}
+app.locals.menu = require("./data/menu.json");
 
 // Prevent server for crashing too hard under high load
 app.use(function(req,res,next){
