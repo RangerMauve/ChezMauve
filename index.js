@@ -3,7 +3,12 @@ var
 	app = express(),
 	logger = require("http-logger").logger,
 	path = require("path"),
-	busy = require("busy")();
+	busy = require("busy")(),
+	http = require('http'),
+	server = http.createServer(app);
+
+module.exports.app = app;
+module.exports.server = server;
 
 // Set up templates
 app.set("views",__dirname+"/templates");
@@ -30,7 +35,7 @@ app.use(express.logger());
 app.use(express.compress());
 
 // Serving public files
-require("./routes")(app);
+require("./routes");
 app.use(express.static(__dirname + "/public"));
 app.use(express.directory('public'))
 
@@ -41,4 +46,4 @@ app.use(function(req, res,next) {
 });
 
 
-app.listen(process.env.VCAP_APP_PORT || 80);
+server.listen(process.env.VCAP_APP_PORT || 80);
