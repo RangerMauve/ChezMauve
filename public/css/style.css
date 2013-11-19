@@ -3,6 +3,7 @@ html {
 	font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 	margin: 0;
 	padding: 0;
+	height:100%;
 }
 #content {
 	margin: 0 1em;
@@ -23,4 +24,47 @@ html {
 	maring:0;
 	padding:0;
 	display:none;
+}
+
+#chatContainer {
+	height:100%;
+	width:100%;
+	position:absolute;
+	font-size:12px;
+}
+
+#chatMessages {
+	position:absolute;
+	bottom:10em;
+	top:3em;
+	right:1em;
+	left:1em;
+	overflow-y:auto;
+	display:none;
+}
+
+#inputContainer {
+	position:absolute;
+	bottom:1em;
+	right:1em;
+	left:1em;
+}
+#input{
+	height:8em;
+	resize:none;
+}
+
+#chat {
+	padding:0;
+	overflow:hidden;
+}
+
+.fit {
+	box-sizing:border-box;
+	border:none;
+	height:100%;
+	width:100%;
+	margin:0;
+	padding:0;
+	overflow:hidden;
 }

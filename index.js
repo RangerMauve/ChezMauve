@@ -29,7 +29,7 @@ app.use(express.cookieSession({secret:"Where are the bodies?!"}));
 
 // Logging
 app.use(logger(path.join(__dirname,"httpRequests.log")));
-app.use(express.logger());
+//app.use(express.logger());
 
 // Compression
 app.use(express.compress());

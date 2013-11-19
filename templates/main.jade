@@ -1,0 +1,24 @@
+extends boilerplate
+
+block head
+	title Chez Mauve - #{title}
+
+block body
+	h1.ui.center.aligned.purple.header Chez Mauve
+	menu.ui.inverted.menu
+		a.item#chatToggle
+			i.comment.icon
+		each link in menu.links
+			a(href=link.url,class=(link.name===tab?'active item':"item"))
+				i(class=link.icon + " icon")
+				=link.name
+		span.right.icon.menu
+			each link in menu.contact
+				a.item(href=link.url)
+					i(class=link.icon+" icon")
+	.ui.segment#content
+		block content
+	.ui.sidebar#chat
+		iframe.fit(src="/c/lobby")
+block scripts
+	script(src="/scripts/scripts.js")

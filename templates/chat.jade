@@ -1,0 +1,26 @@
+extends boilerplate
+
+block head
+	title= "Chat - "+room
+
+block body
+	.ui.inverted.blue.segment#chatContainer
+		.ui.header#chatHeader
+			i.icon.inverted.circular.blue.comment
+			|Chat: #{room}
+		form.ui.form.center.aligned.segment#login
+			.ui.warning.message(hidden)
+			.field
+				input(type="text",placeholder="Username")
+			input.ui.submit.button(type="submit",value="Login")
+		.ui.segment#chatMessages
+			each message in messages
+				include mixins/chatMessage
+		.ui.form.segment.loading#inputContainer
+			.field
+				textarea#input
+
+block scripts
+	| <script>var roomName="#{room}"</script>
+	script(src="/scripts/sockjs-0.3.js")
+	script(src="/scripts/chatscripts.js")

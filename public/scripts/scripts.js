@@ -3,13 +3,9 @@ $menu = $("menu .item");
 $menu.tab();
 
 // Initialize the chat side bar
-$chat = $("#chat");
-$chatToggle = $("#chattoggle");
-$chat.sidebar();
-$chatToggle.click(function () {
-	$chatToggle.toggleClass("active");
-	$chat.sidebar("toggle");
-});
+$chat = $("#chat")
+.sidebar("attach events","#chatToggle","toggle")
+.sidebar();
 
 function fitSize(e){
 	console.log("ViewFrame has loaded");
