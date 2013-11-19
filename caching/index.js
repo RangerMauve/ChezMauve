@@ -20,13 +20,13 @@ module.exports = {
 				var result = {
 					mtime: stat.mtime
 				}
-				cache_info[file] = result;
 				done(null, result);
 				module.exports.updateCacheInfo(file,result);
 			});
 		}
 	},
 	updateCacheInfo: function (file, info, done) {
+		cache_info[file] = info;
 		fs.writeFile(
 			__dirname+"/cache-info.json",
 			JSON.stringify(cache_info),
