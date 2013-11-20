@@ -5,7 +5,7 @@ module.exports = {
 		fs.stat(file, function (error, stat) {
 			if (error) return done(error, null);
 			var result = {
-				mtime: stat.mtime
+				hash: stat.mtime
 			}
 			done(null, result);
 		});
