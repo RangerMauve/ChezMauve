@@ -3,7 +3,7 @@ var
 	app = express(),
 	logger = require("http-logger").logger,
 	path = require("path"),
-	busy = require("busy")(),
+	busy = require("busy")({max:500,interval:200}),
 	http = require('http'),
 	server = http.createServer(app);
 
