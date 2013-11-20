@@ -1,13 +1,13 @@
 doctype 5
 html
 	head
-		link(href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.9.3/css/semantic.min.css", rel="stylesheet",type="text/css")
+		link(href=scripts.semantic_css, rel="stylesheet",type="text/css")
 		link(href="/css/style.css", rel="stylesheet", type="text/css")
 		meta(charset="utf-8")
 		meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
 		block head
 	body
 		block body
-		script(src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
-		script(src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.9.3/javascript/semantic.min.js")
+		script(src=scripts.jquery)
+		script(src=scripts.semantic_js)
 		block scripts

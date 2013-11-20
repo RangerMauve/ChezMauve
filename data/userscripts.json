@@ -1,0 +1,27 @@
+{
+	"title": "Userscripts",
+	"tab": "Userscripts",
+	"list": {
+		"description": "These are single file plugins that let you do various things.",
+		"items": [
+			{
+				"title": "Autopoke",
+				"description": "This automatically responds to pokes on Facebook for you. ",
+				"url": "/userscripts/Autopoke.user.js",
+				"icon": "right hand"
+			},
+			{
+				"title": "XKCD News Substitutions",
+				"description": "This does some word substitutions that make news stories more fun to read.",
+				"url": "/userscript/XKCD1288.user.js",
+				"icon": "browser"
+			},
+			{
+				"title": "No Typing Notifications",
+				"description": "This gives you a more stealthy Facebook chat experience by blocking people from seeing the \"seen\" and \"typing\" notifications.",
+				"url": "/userscripts/NoTypeNotify.user.js",
+				"icon": "chat"
+			}
+		]
+	}
+}

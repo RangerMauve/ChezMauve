@@ -1,0 +1,14 @@
+{
+	"development":{
+		"semantic_css":"/css/semantic.min.css",
+		"semantic_js":"/scripts/semantic.min.js",
+		"jquery":"/scripts/jquery.js",
+		"sockjs":"/sockjs-0.3.min.js"
+	},
+	"production":{
+		"semantic_css":"//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.9.3/css/semantic.min.css",
+		"semantic_js":"//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.9.3/javascript/semantic.min.js",
+		"jquery":"//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js",
+		"sockjs":"http://cdn.sockjs.org/sockjs-0.3.min.js"
+	}
+}
