@@ -3,7 +3,7 @@ var
 	app = express(),
 	logger = require("http-logger").logger,
 	path = require("path"),
-	//busy = require("busy")(),
+	busy = require("busy")(),
 	http = require('http'),
 	server = http.createServer(app);
 
@@ -17,9 +17,9 @@ app.locals.pretty = true;
 app.locals.menu = require("./data/menu.json");
 
 // Prevent server for crashing too hard under high load
-//app.use(function(req,res,next){
-	//busy.blocked ? res.send(503,"Server load too high") : next();
-//});
+app.use(function(req,res,next){
+	busy.blocked ? res.send(503,"Server load too high") : next();
+});
 
 // Parsing out the body and session data
 app.use(express.json());
