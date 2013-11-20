@@ -135,6 +135,17 @@ chat.installHandlers(server, {
 	prefix: "/chat"
 });
 
+app.get("/c",function(req,res){
+	var roomdata = {};
+	for(var k in rooms){
+		roomdata[k]={
+			users:rooms[k].users,
+			buffer:rooms[k].buffer,
+		};
+	}
+	res.json(roomdata);
+});
+
 app.get("/c/:room", function (req, res) {
 	var roomName = req.params.room;
 	var messages = (roomName in rooms) ? rooms[roomName].buffer : [];
