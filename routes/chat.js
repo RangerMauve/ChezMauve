@@ -82,7 +82,8 @@ chat.on("connection", function (socket) {
 			socket.json({
 				type: "login",
 				name:name,
-				messages: room.buffer
+				messages: room.buffer,
+				users: room.users.join(", ")
 			});
 			toRoom(room.name,{
 				type: "join",
