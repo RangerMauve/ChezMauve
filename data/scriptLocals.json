@@ -3,7 +3,7 @@
 		"semantic_css":"/css/semantic.min.css",
 		"semantic_js":"/scripts/semantic.min.js",
 		"jquery":"/scripts/jquery.js",
-		"sockjs":"/sockjs-0.3.min.js"
+		"sockjs":"/scripts/sockjs-0.3.min.js"
 	},
 	"production":{
 		"semantic_css":"//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.9.3/css/semantic.min.css",
