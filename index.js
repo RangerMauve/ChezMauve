@@ -15,7 +15,7 @@ app.set("views",__dirname+"/templates");
 app.set("view engine","jade");
 app.locals.pretty = true;
 app.locals.menu = require("./data/menu.json");
-app.locals.scripts = require("./data/scriptLocals.json").development;
+app.locals.scripts = require("./data/scriptLocals.json").production;
 
 /*// Prevent server for crashing too hard under high load
 app.use(function(req,res,next){
