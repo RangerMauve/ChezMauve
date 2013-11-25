@@ -9,7 +9,6 @@
     "express": "~3.4.4",
     "http-logger": "0.0.x",
     "jade": "~0.35.0",
-    "busy": "~0.1.1",
     "notmodified": "~0.2.3",
     "sockjs": "~0.3.8"
   }
