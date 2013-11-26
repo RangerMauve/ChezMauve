@@ -7,6 +7,11 @@
 		height:512;
 		margin:0 auto;
 		border:2px solid black;
+		image-rendering: -moz-crips-edges;
+		image-rendering:   -o-crisp-edges;
+		image-rendering: -webkit-optimize-contrast;
+		image-rendering: crisp-edges;
+		-ms-interpolation-mode: nearest-neighbor;
 	}
 	#tmcan{
 		display:none;
@@ -95,7 +100,7 @@
 		dtslmt:10
 	};
 	window.onload = function(){
-		var width=192,height=192;
+		var width=128,height=128;
 		var dir = {
 			x:0,y:0,
 			set:function(x,y){
@@ -128,6 +133,11 @@
 		var ctx2 = can2.getContext("2d");
 		ctx.lineCap = "round";
 		
+		ctx.imageSmoothingEnabled = false;
+		ctx.mozImageSmoothingEnabled = false;
+		ctx.oImageSmoothingEnabled = false;
+		ctx.webkitImageSmoothingEnabled = false;
+
 		restart();
 		
 		function spawn(){
