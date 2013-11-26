@@ -6,7 +6,8 @@ html {
 	height:100%;
 }
 #content {
-	margin: 0 1em;
+	max-width:80%;
+	margin:0 auto;
 }
 .ui.list a {
 	cursor: pointer;
@@ -54,11 +55,6 @@ html {
 	resize:none;
 }
 
-#chat {
-	padding:0;
-	overflow:hidden;
-}
-
 .fit {
 	box-sizing:border-box;
 	border:none;
@@ -67,4 +63,16 @@ html {
 	margin:0;
 	padding:0;
 	overflow:hidden;
+}
+
+@media screen and (max-width:900px){
+	.ui.main.menu .text {
+		display:none;
+	}
+}
+
+@media screen and (max-width:530px){
+	#chatToggle{
+		display:none;
+	}
 }
