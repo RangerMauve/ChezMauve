@@ -1,5 +1,4 @@
-var
-express = require("express"),
+var express = require("express"),
 	app = express(),
 	logger = require("http-logger").logger,
 	path = require("path"),
