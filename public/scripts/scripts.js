@@ -3,16 +3,15 @@ $menu = $("menu .item");
 $menu.tab();
 
 // Initialize the chat side bar
-$chat = $("#chat")
-.sidebar("attach events","#chatToggle","toggle")
-.sidebar();
+$chat = $("#chat").sidebar("attach events", "#chatToggle", "toggle")
 
-function fitSize(e){
+function fitSize(e) {
 	console.log("ViewFrame has loaded");
-	function updateSize(){
+
+	function updateSize() {
 		var b = $(this.contentWindow.document);
-		this.style.height = b.height()+"px";
+		this.style.height = b.height() + "px";
 		this.style.display = "block";
 	}
-	setTimeout(updateSize.bind(e),100);
+	setTimeout(updateSize.bind(e), 100);
 }
