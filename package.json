@@ -12,6 +12,8 @@
     "notmodified": "~0.2.3",
     "sockjs": "~0.3.8",
     "nedb": "~0.8.12",
-    "marked": "~0.2.10"
+    "marked": "~0.2.10",
+    "passport": "~0.1.17",
+    "passport-google": "~0.3.0"
   }
 }

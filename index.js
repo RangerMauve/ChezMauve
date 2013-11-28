@@ -1,4 +1,7 @@
 var express = require("express"),
+	passport = require("passport"),
+	GoogleStrategy = require("passport-google").Strategy,
+	db = require("./data"),
 	app = express(),
 	logger = require("http-logger").logger,
 	path = require("path"),
@@ -45,6 +48,15 @@ app.configure("production", "development", function () {
 
 	// Compression
 	app.use(express.compress());
+
+	// Configure passport.js
+	passport.use(new GoogleStrategy({
+
+		},
+		function (id, profile, done) {
+
+		}
+	));
 
 	// Serving public files
 	require("./routes");
