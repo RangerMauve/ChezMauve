@@ -1,6 +1,7 @@
 var Datastore = require("nedb");
 
 var db = {};
+module.exports = db;
 
 db.Users = new Datastore({
 	filename: __dirname + "/users.json",
