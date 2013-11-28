@@ -1,0 +1,6 @@
+{
+	"domain":{
+		"development":"http://127.0.0.1",
+		"production":"http://mauve.us.to"
+	}
+}
