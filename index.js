@@ -2,7 +2,8 @@ var express = require("express"),
 	passport = require("passport"),
 	db = require("./data"),
 	app = express(),
-	logger = require("http-logger").logger,
+	httplogger = require("http-logger"),
+	logger = httplogger.logger,
 	path = require("path"),
 	http = require('http'),
 	server = http.createServer(app),
@@ -64,7 +65,9 @@ app.configure("production", "development", function () {
 	}));
 
 	// Logging
-	app.use(logger(path.join(__dirname, "httpRequests.log")));
+	var logpath = path.join(__dirname, "httpRequests.log");
+	app.use(logger(logpath));
+	httplogger.server(logpath).listen(6336);
 
 	// Configure passport.js
 	app.use(passport.initialize());
