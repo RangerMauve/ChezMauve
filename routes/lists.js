@@ -2,15 +2,19 @@ var path = require("path"),
 	app = require("../").app;
 
 app.get("/tools", function (req, res) {
-	res.render("blog/viewlist", require("../data/tools.json"))
+	res.render("blog/viewlist", require("../data/lists.json").list.items[1])
 });
 
 app.get("/games", function (req, res) {
-	res.render("blog/viewlist", require("../data/games.json"));
+	res.render("blog/viewlist", require("../data/lists.json").list.items[0]);
 });
 
 app.get("/userscripts", function (req, res) {
-	res.render("blog/viewlist", require("../data/userscripts.json"));
+	res.render("blog/viewlist", require("../data/lists.json").list.items[2]);
+});
+
+app.get("/stuff", function (req, res) {
+	res.render("blog/viewlist", require("../data/lists.json"));
 });
 
 app.get(/view(\/.+)/, function (req, res) {

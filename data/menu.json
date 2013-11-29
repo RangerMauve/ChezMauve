@@ -6,19 +6,9 @@
 			"icon": "home"
 		},
 		{
-			"name": "Games",
-			"url": "/games",
-			"icon": "gamepad"
-		},
-		{
-			"name": "Tools",
-			"url": "/tools",
-			"icon": "wrench"
-		},
-		{
-			"name": "Userscripts",
-			"url": "/userscripts",
-			"icon": "puzzle piece"
+			"name": "Stuff",
+			"url": "/stuff",
+			"icon": "briefcase"
 		}
 	],
 	"contact": [
