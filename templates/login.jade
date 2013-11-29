@@ -2,12 +2,11 @@ extends blog/main
 
 block content
 	.ui.center.aligned.header Sign in with
-	.3.fluid.ui.buttons
+	.2.fluid.ui.buttons
 		a.ui.twitter.button(href="/auth/twitter")
 			i.twitter.icon
+			span.text Twitter
 		.or
 		a.ui.google.plus.button(href="/auth/google")
 			i.google.plus.icon
-		.or
-		a.ui.facebook.button
-			i.facebook.icon
+			span.text Google
