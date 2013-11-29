@@ -1,5 +1,7 @@
 var app = require("../").app,
 	passport = require("passport"),
+	GoogleStrategy = require("passport-google").Strategy,
+	TwitterStrategy = require("passport-twitter").Strategy,
 	Users = require("../data").Users;
 
 // Website endpoints for loggin in/out

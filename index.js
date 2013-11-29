@@ -1,7 +1,5 @@
 var express = require("express"),
 	passport = require("passport"),
-	GoogleStrategy = require("passport-google").Strategy,
-	TwitterStrategy = require("passport-twitter").Strategy,
 	db = require("./data"),
 	app = express(),
 	logger = require("http-logger").logger,
