@@ -16,6 +16,7 @@ app.configure("production", function () {
 	// Set up config
 	var rawcfg = require("./config.json");
 	config = rawcfg.production;
+	module.exports.config = config;
 	for (var k in rawcfg) {
 		if (k !== "production" && k != "development") {
 			config[k] = rawcfg[k];
@@ -31,6 +32,7 @@ app.configure("development", function () {
 	// Set up config
 	var rawcfg = require("./config.json");
 	config = rawcfg.development;
+	module.exports.config = config;
 	for (var k in rawcfg) {
 		if (k !== "production" && k != "development") {
 			config[k] = rawcfg[k];
