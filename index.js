@@ -76,7 +76,13 @@ app.configure("production", "development", function () {
 		console.log("Deserialize", id);
 		db.Users.findOne({
 			openId: id
-		}, done);
+		}, function(err,doc){
+			if(!doc){
+				done("Not Found",null);
+			} else if(err){
+				done(err,null);
+			} else done(null,doc);
+		});
 	})
 	passport.use(new GoogleStrategy({
 			returnURL: config.domain + "/auth/google/return",
