@@ -1,6 +1,7 @@
 var express = require("express"),
 	passport = require("passport"),
 	GoogleStrategy = require("passport-google").Strategy,
+	TwitterStrategy = require("passport-twitter").Strategy,
 	db = require("./data"),
 	app = express(),
 	logger = require("http-logger").logger,
@@ -68,10 +69,13 @@ app.configure("production", "development", function () {
 	// Configure passport.js
 	app.use(passport.initialize());
 	app.use(passport.session());
+	// Get/set users through NeDB
 	passport.serializeUser(function (user, done) {
 		console.log("Serialize", user);
-		db.Users.update({openId:user.openId},user,{},function(err){
-			if(err)done(err,null);
+		db.Users.update({
+			openId: user.openId
+		}, user, {}, function (err) {
+			if (err) done(err, null);
 			else done(null, user.openId);
 		})
 	});
@@ -79,14 +83,15 @@ app.configure("production", "development", function () {
 		console.log("Deserialize", id);
 		db.Users.findOne({
 			openId: id
-		}, function(err,doc){
-			if(!doc){
-				done("Not Found",null);
-			} else if(err){
-				done(err,null);
-			} else done(null,doc);
+		}, function (err, doc) {
+			if (!doc) {
+				done("Not Found", null);
+			} else if (err) {
+				done(err, null);
+			} else done(null, doc);
 		});
-	})
+	});
+	// Login with Google
 	passport.use(new GoogleStrategy({
 			returnURL: config.domain + "/auth/google/return",
 			realm: config.domain + "/"
@@ -94,17 +99,41 @@ app.configure("production", "development", function () {
 		function (ident, profile, done) {
 			var url = require("url");
 			var id = url.parse(ident, true).query.id;
-			console.log("Login", profile);
 			db.Users.update({
 				openId: id
 			}, {
 				openId: id,
-				profile: profile
+				displayName: profile.displayName,
+				emails: profile.emails||[],
 			}, {
 				upsert: true
 			}, function (err, docs) {
 				db.Users.findOne({
 					openId: id
+				}, function (err, user) {
+					done(err, user);
+				});
+			});
+		}
+	));
+	//Login with twitter
+	passport.use(new TwitterStrategy({
+			consumerKey: process.env["TWITTER_KEY"],
+			consumerSecret: process.env["TWITTER_SECRET"],
+			callbackURL: config.domain + "/auth/twitter/return"
+		},
+		function (token, secret, profile, done) {
+			db.Users.update({
+				openId: token
+			}, {
+				openId: token,
+				displayName: profile.displayName,
+				emails: profile.emails||[],
+			}, {
+				upsert: true
+			}, function (err, docs) {
+				db.Users.findOne({
+					openId: token
 				}, function (err, user) {
 					done(err, user);
 				});
