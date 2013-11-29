@@ -70,7 +70,10 @@ app.configure("production", "development", function () {
 	app.use(passport.session());
 	passport.serializeUser(function (user, done) {
 		console.log("Serialize", user);
-		done(null, user.openId);
+		db.Users.update({openId:user.openId},user,{},function(err){
+			if(err)done(err,null);
+			else done(null, user.openId);
+		})
 	});
 	passport.deserializeUser(function (id, done) {
 		console.log("Deserialize", id);
