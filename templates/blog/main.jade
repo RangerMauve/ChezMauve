@@ -5,24 +5,25 @@ block head
 
 block body
 	menu.ui.inverted.main.menu
+		span.left.menu
+			a.item#chatToggle
+				i.comment.icon
+			each link in menu.links
+				a(href=link.url,class=(link.name===tab?'active item':"item"))
+					i(class=link.icon + " icon")
+					span.text=link.name
+			if user
+				a.item(href="/logout")
+					i.sign.out.icon
+					span.text Logout
+			else
+				a.item(href="/login")
+					i.sign.in.icon
+					span.text Sign in
 		span.right.icon.menu
 			each link in menu.contact
 				a.item(href=link.url)
 					i(class=link.icon+" icon")
-		a.item#chatToggle
-			i.comment.icon
-		each link in menu.links
-			a(href=link.url,class=(link.name===tab?'active item':"item"))
-				i(class=link.icon + " icon")
-				span.text=link.name
-		if user
-			a.item(href="/logout")
-				i.sign.out.icon
-				span.text Logout
-		else
-			a.item(href="/login")
-				i.sign.in.icon
-				span.text Sign in
 	.ui.segment#content
 		block content
 	iframe.ui.sidebar#chat(src="/c/lobby")
