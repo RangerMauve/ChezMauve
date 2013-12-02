@@ -26,7 +26,7 @@
 	// Fix for Facebook
 	function removeFB(from) {
 		var lin = from.querySelectorAll("._58cn");
-		[].forEach(lin, function (e) {
+		[].forEach.call(lin, function (e) {
 			e.remove();
 		});
 	}
