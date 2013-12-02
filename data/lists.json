@@ -77,18 +77,21 @@
 							"description": "This automatically responds to pokes on Facebook for you. ",
 							"url": "/userscripts/Autopoke.user.js",
 							"icon": "right hand"
-						},
-						{
+						}, {
 							"title": "XKCD News Substitutions",
 							"description": "This does some word substitutions that make news stories more fun to read.",
 							"url": "/userscript/XKCD1288.user.js",
 							"icon": "browser"
-						},
-						{
+						}, {
 							"title": "No Typing Notifications",
 							"description": "This gives you a more stealthy Facebook chat experience by blocking people from seeing the \"seen\" and \"typing\" notifications.",
 							"url": "/userscripts/NoTypeNotify.user.js",
 							"icon": "chat"
+						}, {
+							"title": "Hash Be Gone",
+							"description": "Do you hate hashtags? Well this gets rid of them all. Everywhere.",
+							"url": "/userscripts/HashBeGone.user.js",
+							"icon": "remove sign"
 						}
 					]
 				},
