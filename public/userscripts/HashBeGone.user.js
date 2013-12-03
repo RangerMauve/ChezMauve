@@ -23,24 +23,29 @@
 		});
 	}
 
-	// Fix for Facebook
-	function removeFB(from) {
-		var lin = from.querySelectorAll("._58cn");
-		[].forEach.call(lin, function (e) {
+	function removeAll(list) {
+		[].forEach.call(list, function (e) {
 			e.remove();
 		});
+	}
+
+	// Fix for Facebook
+	function removeKnown(from) {
+		if (document.URL.toLowerCase().indexOf("facebook") != -1)
+			removeAll(from.querySelectorAll("._58cn"));
+		removeAll(from.querySelectorAll(".twitter-hashtag"));
 	}
 
 	// Do the substitution on everything at page load
 	substitute(getTextNodes(document.body));
 
 	// Do the Facebook fix at page loads
-	removeFB(document.body);
+	removeKnown(document.body);
 
 	// Perform the filtering whenever a new node is added to support AJAX sites
 	document.body.addEventListener("DOMNodeInserted", function (e) {
 		substitute(getTextNodes(e.target));
-		removeFB(e.target);
+		removeKnown(e.target);
 	});
 
 })();
