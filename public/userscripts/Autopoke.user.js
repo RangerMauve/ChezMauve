@@ -6,7 +6,7 @@
 // ==/UserScript==
 (function(){
 	function pokemon(){
-		var as= document.querySelectorAll(".mam .pam");
+		var as= document.querySelectorAll(".mam.pam");
 		for(var i =0,j=as.length; i < j; ++i)
 			if(as[i].id){
 				var e = as[i];
