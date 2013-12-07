@@ -32,7 +32,7 @@
 	// Fix for Facebook
 	function removeKnown(from) {
 		if(!from.querySelectorAll)return;
-		if (document.URL.toLowerCase().indexOf("facebook") != -1)
+		if(document.URL.toLowerCase().indexOf("facebook") != -1)
 			removeAll(from.querySelectorAll("._58cn"));
 		removeAll(from.querySelectorAll(".twitter-hashtag"));
 	}
