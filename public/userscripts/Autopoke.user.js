@@ -11,7 +11,7 @@
 			if(as[i].id){
 				var e = as[i];
 				if(e.id.indexOf("poke_live_item") !=-1){
-					e.querySelectorAll("a")[2].click();
+					e.querySelectorAll("a")[3].click();
 				}
 			}
 	}
